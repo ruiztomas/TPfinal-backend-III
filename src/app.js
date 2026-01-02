@@ -6,13 +6,30 @@ import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
 import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
+import mocksRouter from './routes/mocks.router.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
 const app = express();
 const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`URL DE MONGO`)
+mongoose.connect(process.env.MONGO_URL)
+    .then(()=>console.log('MongoDB conectado'))
+    .catch(err=>console.error('Error MongoDB:', err));
+
+const swaggerOptions={
+    definition:{
+        openapi:"3.0.1",
+        info:{
+            title:'Adoptme API',
+            description:'Documentacionn del modulo Users'
+        }
+    },
+    apis: ["./src/docs/*.yaml"]
+};
 
 app.use(express.json());
 app.use(cookieParser());
+app.use('/api/mocks', mocksRouter);
 
 app.use('/api/users',usersRouter);
 app.use('/api/pets',petsRouter);
