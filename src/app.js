@@ -10,11 +10,16 @@ import mocksRouter from './routes/mocks.router.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
-const app = express();
-const PORT = process.env.PORT||8080;
-mongoose.connect(process.env.MONGO_URL)
-    .then(()=>console.log('MongoDB conectado'))
-    .catch(err=>console.error('Error MongoDB:', err));
+const app=express();
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use('/api/mocks', mocksRouter);
+app.use('/api/users',usersRouter);
+app.use('/api/pets',petsRouter);
+app.use('/api/adoptions',adoptionsRouter);
+app.use('/api/sessions',sessionsRouter);
 
 const swaggerOptions={
     definition:{
@@ -27,13 +32,7 @@ const swaggerOptions={
     apis: ["./src/docs/*.yaml"]
 };
 
-app.use(express.json());
-app.use(cookieParser());
-app.use('/api/mocks', mocksRouter);
+const specs=swaggerJsdoc(swaggerOptions);
+app.use('/api/docs',swaggerUi.serve, swaggerUi.setup(specs));
 
-app.use('/api/users',usersRouter);
-app.use('/api/pets',petsRouter);
-app.use('/api/adoptions',adoptionsRouter);
-app.use('/api/sessions',sessionsRouter);
-
-app.listen(PORT,()=>console.log(`Listening on ${PORT}`))
+export default app;
