@@ -20,7 +20,7 @@ Proyecto desarrollado con Node.js, Express, MongoDB y Docker.
 
 La aplicación está disponible como imagen pública en Docker Hub:
 
-👉 https://hub.docker.com/r/ruiztomas29/adoptme-backend
+👉 https://hub.docker.com/r/ruiztomas/adoptme-backend
 
 ---
 
