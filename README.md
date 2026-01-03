@@ -13,6 +13,7 @@ Proyecto desarrollado con Node.js, Express, MongoDB y Docker.
 - Mongoose
 - Docker
 - Swagger (Documentación API)
+- Mocha + Chai (Test funcionales)
 
 ---
 
@@ -20,7 +21,7 @@ Proyecto desarrollado con Node.js, Express, MongoDB y Docker.
 
 La aplicación está disponible como imagen pública en Docker Hub:
 
-👉 https://hub.docker.com/r/ruiztomas/adoptme-backend
+👉 [ruiztomas/adoptme-backend](https://hub.docker.com/r/ruiztomas/adoptme-backend)
 
 ---
 
@@ -36,3 +37,12 @@ La aplicación está disponible como imagen pública en Docker Hub:
 docker run -p 8080:8080 \
 -e MONGO_URL=mongodb+srv://ruiztomas29:123456tar@cluster.mongodb.net/adoptme \
 ruiztomas/adoptme-backend
+
+#### Endpoints principales
+
+POST   /api/users               → Crear usuario
+POST   /api/pets                → Crear mascota
+POST   /api/adoptions/:uid/:pid → Crear adopción
+GET    /api/adoptions           → Listar adopciones
+GET    /api/adoptions/:id       → Obtener adopción por ID
+DELETE /api/adoptions/:id       → Eliminar adopción

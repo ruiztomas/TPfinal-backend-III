@@ -1,5 +1,7 @@
-import { adoptionsService, petsService, usersService } from "../services/index.js"
+import { adoptionsService, petsService, usersService } from "../services/index.js";
+import mongoose from "mongoose";
 
+const isValidId=(id)=>mongoose.Types.ObjectId.isValid(id);
 const getAllAdoptions=async(req,res)=>{
     try{ 
         const result=await adoptionsService.getAll();
